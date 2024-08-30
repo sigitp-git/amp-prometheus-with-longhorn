@@ -6,6 +6,10 @@ all values are here: https://github.com/prometheus-community/helm-charts/blob/ma
 
 ## usage
 ```
+Admin:~/environment/amp $ IAM_PROXY_PROMETHEUS_ROLE_ARN=arn:aws:iam::01234567890:role/EKS-AMP-ServiceAccount-Role
+Admin:~/environment/amp $ WORKSPACE_ID=ws-7c0e42fa-672e-408e-9970-f4343ff6233f
+Admin:~/environment/amp $ AWS_REGION=us-east-1
+
 Admin:~/environment/amp $ helm install prometheus-for-amp prometheus-community/prometheus -n prometheus -f ./amp_ingest_override_values-storageclass-modify.yaml \--set serviceAccounts.server.annotations."eks\.amazonaws\.com/role-arn"="${IAM_PROXY_PROMETHEUS_ROLE_ARN}" \--set server.remoteWrite[0].url="https://aps-workspaces.${AWS_REGION}.amazonaws.com/workspaces/${WORKSPACE_ID}/api/v1/remote_write" \--set server.remoteWrite[0].sigv4.region=${AWS_REGION}
 NAME: prometheus-for-amp
 LAST DEPLOYED: Fri Aug 30 04:21:18 2024
