@@ -1,5 +1,7 @@
 # prometheus-with-longhorn
-Enabling prometheus on EC2 instances without EBS CSI, but using Longhorn instead. Useful for Outposts servers or other instance store EC2 instances type.
+Enabling Amazon Managed Service for Prometheus (AMP) prometheus server on EC2 instances without EBS CSI, but using Longhorn CSI instead: https://longhorn.io
+Useful for Outposts servers or other instance store EC2 instances type.
+
 Ingestion towards Amazon Managed Service for Prometheus (AMP) workspaces as described here: https://aws.amazon.com/blogs/mt/getting-started-amazon-managed-service-for-prometheus/
 
 all values are here: https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus/values.yaml
