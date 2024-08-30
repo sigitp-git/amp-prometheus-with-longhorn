@@ -50,3 +50,22 @@ For more information on running Prometheus, visit:
 https://prometheus.io/
 Admin:~/environment/amp $ 
 ```
+
+## longhorn pv and pvc
+```
+Admin:~/environment/amp $ kubectl get pvc -A
+NAMESPACE    NAME                                         STATUS        VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+default      longhorn-pvc                                 Bound         pvc-e8d87a93-ef2d-44a0-9b79-28481853ceb2   10Gi       RWX            longhorn-sc    <unset>                 20d
+default      longhorn-pvc2                                Terminating   pvc-dee66439-33a0-45a4-9b2e-cd4d8c6f3e2a   10Gi       RWX            longhorn-sc2   <unset>                 15d
+default      longhorn-pvc3                                Bound         pvc-f48a0bfe-0c90-440e-8cf0-4694413bacee   10Gi       RWX            longhorn-sc    <unset>                 9d
+prometheus   storage-prometheus-for-amp-alertmanager-0    Bound         pvc-b6b83151-9f51-459e-a8ae-f376752f6832   2Gi        RWO            longhorn       <unset>                 17m
+prometheus   storage-volume-prometheus-for-amp-server-0   Bound         pvc-082458e3-1748-4d92-934d-9e1c4de09e1e   8Gi        RWO            longhorn-sc    <unset>                 17m
+Admin:~/environment/amp $ kubectl get pv -A
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                                                   STORAGECLASS   VOLUMEATTRIBUTESCLASS   REASON   AGE
+pvc-082458e3-1748-4d92-934d-9e1c4de09e1e   8Gi        RWO            Delete           Bound    prometheus/storage-volume-prometheus-for-amp-server-0   longhorn-sc    <unset>                          17m
+pvc-b6b83151-9f51-459e-a8ae-f376752f6832   2Gi        RWO            Delete           Bound    prometheus/storage-prometheus-for-amp-alertmanager-0    longhorn       <unset>                          17m
+pvc-dee66439-33a0-45a4-9b2e-cd4d8c6f3e2a   10Gi       RWX            Delete           Bound    default/longhorn-pvc2                                   longhorn-sc2   <unset>                          15d
+pvc-e8d87a93-ef2d-44a0-9b79-28481853ceb2   10Gi       RWX            Delete           Bound    default/longhorn-pvc                                    longhorn-sc    <unset>                          20d
+pvc-f48a0bfe-0c90-440e-8cf0-4694413bacee   10Gi       RWX            Delete           Bound    default/longhorn-pvc3                                   longhorn-sc    <unset>                          9d
+Admin:~/environment/amp $ 
+```
