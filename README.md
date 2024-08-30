@@ -1,4 +1,4 @@
-# prometheus-with-longhorn
+# Amazon Managed Service for Prometheus (AMP) prometheus server deployment using Longhorn CSI
 Enabling Amazon Managed Service for Prometheus (AMP) prometheus server on EC2 instances without EBS CSI, but using Longhorn CSI instead: https://longhorn.io
 Useful for Outposts servers or other instance store EC2 instances type.
 
