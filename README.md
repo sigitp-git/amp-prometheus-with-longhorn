@@ -162,7 +162,7 @@ prometheus        prometheus-for-amp-server-0                                  2
 Admin:~/environment/amp $ 
 ```
 
-## manual query to AMP
+## PromQL query to AMP
 ```
 Admin:~/environment/amp $ awscurl -X POST --region us-east-1 --service aps "${AMP_QUERY_ENDPOINT}" -d 'query=up' --header 'Content-Type: application/x-www-form-urlencoded' | jq
 {
