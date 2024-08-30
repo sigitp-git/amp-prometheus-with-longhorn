@@ -163,6 +163,8 @@ Admin:~/environment/amp $
 ```
 
 ## PromQL query to AMP
+Define your AMP_QUERY_ENDPOINT that can be derived from AWS AMP Management Console or CLI.
+https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-compatible-APIs.html
 ```
 Admin:~/environment/amp $ awscurl -X POST --region us-east-1 --service aps "${AMP_QUERY_ENDPOINT}" -d 'query=up' --header 'Content-Type: application/x-www-form-urlencoded' | jq
 {
