@@ -1,0 +1,15 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: longhorn-sc
+provisioner: driver.longhorn.io
+allowVolumeExpansion: true
+reclaimPolicy: "Delete"
+volumeBindingMode: Immediate
+parameters:
+  numberOfReplicas: "4"
+  staleReplicaTimeout: "30"
+  fromBackup: ""
+  fsType: "xfs"
+  nfsOptions: "vers=4.1,noresvport,softerr,timeo=600,retrans=5"
+  # nodeSelector: "longhorn"
