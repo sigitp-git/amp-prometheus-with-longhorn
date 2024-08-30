@@ -1,0 +1,36 @@
+groups:
+  - name: ClusterName-Region_workspace-alerts # Unique string of the group name.
+    rules: # Sample of defining a Recording rule
+    - record: metric:recording_rule
+      expr: sample_expression
+  - name: alert_name
+    rules: # Sample of defining an Alerting rule
+    - alert: metric:alerting_rule
+      expr: sample_expression
+      for: 2m
+    # https://samber.github.io/awesome-prometheus-alerts/rules.html#kubernetes
+    - alert: KubernetesPodNotHealthy
+      expr: sum by (namespace, pod) (kube_pod_status_phase{phase=~"Pending|Unknown|Failed"}) > 0
+      for: 15m
+      labels:
+        severity: critical
+      annotations:
+        summary: Kubernetes Pod not healthy (instance {{ $labels.instance }})
+        description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} has been in a non-running state for longer than 15 minutes.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    #  1.4.1. Container killed, This rule can be very noisy in dynamic infra with legitimate container start/stop/deployment.
+    - alert: ContainerKilled
+      expr: time() - container_last_seen > 60
+      for: 0m
+      labels:
+        severity: warning
+      annotations:
+        summary: Container killed (instance {{ $labels.instance }})
+        description: "A container has disappeared\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    - alert: ContainerLowCpuUtilization
+      expr: (sum(rate(container_cpu_usage_seconds_total{container!=""}[5m])) by (pod, container) / sum(container_spec_cpu_quota{container!=""}/container_spec_cpu_period{container!=""}) by (pod, container) * 100) < 20
+      for: 7d
+      labels:
+        severity: info
+      annotations:
+        summary: Container Low CPU utilization (instance {{ $labels.instance }})
+        description: "Container CPU utilization is under 20% for 1 week. Consider reducing the allocated CPU.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
