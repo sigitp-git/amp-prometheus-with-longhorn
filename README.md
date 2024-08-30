@@ -4,7 +4,7 @@ Useful for Outposts servers or other instance store EC2 instances type.
 
 Ingestion towards Amazon Managed Service for Prometheus (AMP) workspaces as described here: https://aws.amazon.com/blogs/mt/getting-started-amazon-managed-service-for-prometheus/
 
-all values are here: https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus/values.yaml
+All possible values from prometheus upstream are here: https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus/values.yaml
 
 ## usage
 ```
