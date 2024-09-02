@@ -1,0 +1,49 @@
+{
+  "Version": "2008-10-17",
+  "Id": "__default_policy_ID",
+  "Statement": [
+    {
+      "Sid": "__default_statement_ID",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Action": [
+        "SNS:Publish",
+        "SNS:RemovePermission",
+        "SNS:SetTopicAttributes",
+        "SNS:DeleteTopic",
+        "SNS:ListSubscriptionsByTopic",
+        "SNS:GetTopicAttributes",
+        "SNS:AddPermission",
+        "SNS:Subscribe"
+      ],
+      "Resource": "arn:aws:sns:us-east-1:01234567890:Prometheus-AMP-Alerts",
+      "Condition": {
+        "StringEquals": {
+          "AWS:SourceOwner": "01234567890"
+        }
+      }
+    },
+    {
+        "Sid": "Allow_Publish_Alarms",
+        "Effect": "Allow",
+        "Principal": {
+            "Service": "aps.amazonaws.com"
+        },
+        "Action": [
+            "sns:Publish",
+            "sns:GetTopicAttributes"
+        ],
+        "Condition": {
+            "ArnEquals": {
+                "aws:SourceArn": "arn:aws:aps:us-east-1:01234567890:workspace/ws-7c0e42fa-672e-408e-9970-f4343ff6233f"
+            },
+            "StringEquals": {
+                "AWS:SourceAccount": "01234567890"
+            }
+        },
+        "Resource": "arn:aws:sns:us-east-1:01234567890:Prometheus-AMP-Alerts"
+    }
+  ]
+}
