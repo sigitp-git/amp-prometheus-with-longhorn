@@ -55,7 +55,7 @@ scrape_configs:
       regex: (.+?)(\:\d+)?
       replacement: $1:10249
   # sriov metrics
-  - job_name: 'sriov-metrics'
+  - job_name: sriov-metrics
     kubernetes_sd_configs:
     - role: endpoints
     relabel_configs:
@@ -67,3 +67,14 @@ scrape_configs:
     static_configs:
     - targets: ['sriov-metrics-exporter.monitoring.svc.cluster.local']
     scheme: http
+  - job_name: sriov-metrics-standalone
+    scheme: http
+    kubernetes_sd_configs:
+    - role: node
+    relabel_configs:
+    - source_labels: [__address__]
+      regex: ^(.*):\d+$
+      target_label: __address__
+      replacement: $1:9808
+    - target_label: __scheme__
+      replacement: http
