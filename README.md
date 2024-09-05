@@ -569,3 +569,19 @@ Admin:~/environment/amp $ awscurl -X POST --region us-east-1 --service aps "${AM
   }
 }
 ```
+SRIOV METRICS QUERY
+
+```
+Admin:~/environment $ awscurl -X POST --region us-east-1 --service aps "${AMP_QUERY_ENDPOINT}" -d 'query="(sriov_vf_tx_errors * on (pciAddr)  group_left(pod,namespace)  sriov_kubepoddevice)"' --header 'Content-Type: application/x-www-form-urlencoded' | jq                                         
+{
+  "status": "success",
+  "data": {
+    "resultType": "string",
+    "result": [
+      1725557949,
+      "(sriov_vf_tx_errors * on (pciAddr)  group_left(pod,namespace)  sriov_kubepoddevice)"
+    ]
+  }
+}
+Admin:~/environment $ 
+```
