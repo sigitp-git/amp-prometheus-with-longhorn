@@ -44,4 +44,6 @@ Events:            <none>
 Admin:~/environment $ 
 
 # port forward the endpoint IP and port via SSH to worker node
+# the SSH is executed from your  local workstation, 
+# where SSH destination is the same compute node where it can reach the Endpoints listed above
 ssh -i file.pem -L 8000:10.0.62.85:9090 ec2-user@54.152.145.162
