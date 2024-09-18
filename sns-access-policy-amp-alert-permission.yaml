@@ -26,24 +26,27 @@
       }
     },
     {
-        "Sid": "Allow_Publish_Alarms",
-        "Effect": "Allow",
-        "Principal": {
-            "Service": "aps.amazonaws.com"
+      "Sid": "Allow_Publish_Alarms",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "aps.amazonaws.com"
+      },
+      "Action": [
+        "sns:Publish",
+        "sns:GetTopicAttributes"
+      ],
+      "Resource": "arn:aws:sns:us-east-1:01234567890:Prometheus-AMP-Alerts",
+      "Condition": {
+        "StringEquals": {
+          "AWS:SourceAccount": "01234567890"
         },
-        "Action": [
-            "sns:Publish",
-            "sns:GetTopicAttributes"
-        ],
-        "Condition": {
-            "ArnEquals": {
-                "aws:SourceArn": "arn:aws:aps:us-east-1:01234567890:workspace/ws-7c0e42fa-672e-408e-9970-f4343ff6233f"
-            },
-            "StringEquals": {
-                "AWS:SourceAccount": "01234567890"
-            }
-        },
-        "Resource": "arn:aws:sns:us-east-1:01234567890:Prometheus-AMP-Alerts"
+        "ArnEquals": {
+          "aws:SourceArn": [
+            "arn:aws:aps:us-east-1:01234567890:workspace/ws-7c0e42fa-672e-408e-9970-f4343ff6233f",
+            "arn:aws:aps:us-east-1:01234567890:workspace/ws-23c82b83-eaeb-480f-b9e8-c2e788025465"
+          ]
+        }
+      }
     }
   ]
 }
