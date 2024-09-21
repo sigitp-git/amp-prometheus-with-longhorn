@@ -34,7 +34,7 @@ server:
   ##
   retention: 1h
   
-## Disable alert manager
+## Enable alert manager
 ##
 alertmanager:
   enabled: true
