@@ -575,6 +575,9 @@ Update the AMP ConfigMap to take advantage of SRIOV metrics exporter: https://gi
 Then restart/kill the `prometheus-for-amp-server-0` pod after the ConfigMap updated.
 
 The full ConfigMap after SRIOV metrics exporter enabled:
+
+https://github.com/sigitp-git/amp-prometheus-with-longhorn/blob/main/cm-prometheus-for-amp-server-n-prometheus-with-sriov.yaml 
+
 ```
 global:
   scrape_interval: 1m
