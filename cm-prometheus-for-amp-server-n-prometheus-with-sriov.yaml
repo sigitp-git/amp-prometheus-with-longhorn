@@ -627,6 +627,7 @@ scrape_configs:
     kubeconfig_file: ""
     follow_redirects: true
     enable_http2: true
+# remove this section for AWS managed scraper/agentless mode
 remote_write:
 - url: https://aps-workspaces.us-east-1.amazonaws.com/workspaces/ws-7c0e42fa-672e-408e-9970-f4343ff6233f/api/v1/remote_write
   remote_timeout: 30s
